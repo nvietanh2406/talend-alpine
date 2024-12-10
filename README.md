@@ -115,10 +115,13 @@ docker image ps
 
 ## c. Run 
 ### chay voi job voi image 
+```bash
 docker run --rm talend-job-dremio   --context_param meta_id="1"   --context_param meta_qryname="DRE01_TEST"   --context_param rptname="DRE01_TEST_docker"
-
+```
 ### Chay tren k8s
+```bash
 kubectl delete -n talend -f deployment.yaml
 kubectl apply -n talend -f deployment.yaml
+```
 
-Note: truoc do phai tao namespace talend
+Note: truoc do phai tao namespace talend, sửa file deployment cho mỗi job
