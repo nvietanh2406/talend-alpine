@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: talend-job-dremio
+  labels:
+    app: talend-job
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: talend-job
+  template:
+    metadata:
+      labels:
+        app: talend-job
+    spec:
+      containers:
+      - name: talend-job-dremio
+        image: talend-job-dremio:latest
+        command: ["/bin/sh", "/app/DRE_FULLLOAD_STD_0.1/DRE_FULLLOAD_STD/DRE_FULLLOAD_STD_run.sh"]
+        args: 
+          - "--context_param"
+          - "meta_id=1"
+          - "--context_param"
+          - "meta_qryname=DRE01_TEST"
+          - "--context_param"
+          - "rptname=DRE01_TEST_docker"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        restartPolicy: Never
